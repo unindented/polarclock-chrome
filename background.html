@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Polar Clock</title>
+
+  <script type="text/javascript" src="clock.js"></script>
+  <script type="text/javascript">
+
+    function fields() {
+      var d = new Date();
+
+      var second = (d.getSeconds() + d.getMilliseconds() / 1000) / 60;
+
+      return [
+        { 'value': second, 'index': 0.5, 'width': 0.4 }
+      ];
+    }
+
+    function init() {
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+      var fps = 5;
+
+      CLOCK.clock({
+        'canvas':   canvas,
+        'context':  context,
+        'interval': 1000 / fps,
+        'fields':   fields,
+        'callback': function() {
+          chrome.browserAction.setIcon(
+            { 'imageData': context.getImageData(0, 0, canvas.width, canvas.height) }
+          );
+        }
+      }).start();
+    }
+
+  </script>
+</head>
+<body onload="init()">
+  <canvas id="canvas" width="19" height="19" />
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Polar Clock</title>
+
+  <script type="text/javascript" src="clock.js"></script>
+  <script type="text/javascript">
+
+    function fields() {
+      var d = new Date();
+
+      function days() {
+        return 32 - new Date(d.getYear(), d.getMonth(), 32).getDate();
+      }
+
+      var second =  (d.getSeconds() + d.getMilliseconds() / 1000) / 60;
+      var minute =  (d.getMinutes() + second) / 60;
+      var hour =    (d.getHours() + minute) / 24;
+      var weekday = (d.getDay() + hour) / 7;
+      var date =    (d.getDate() - 1 + hour) / days();
+      var month =   (d.getMonth() + date) / 12;
+
+      return [
+        { 'value': second,  'index': 0.7, 'width': 0.1 },
+        { 'value': minute,  'index': 0.6, 'width': 0.1 },
+        { 'value': hour,    'index': 0.5, 'width': 0.1 },
+        { 'value': weekday, 'index': 0.3, 'width': 0.1 },
+        { 'value': date,    'index': 0.2, 'width': 0.1 },
+        { 'value': month,   'index': 0.1, 'width': 0.1 }
+      ];
+    }
+
+    function init() {
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+      var fps = 15;
+
+      CLOCK.clock({
+        'canvas':   canvas,
+        'context':  context,
+        'interval': 1000 / fps,
+        'fields':   fields
+      }).start();
+    }
+
+  </script>
+</head>
+<body onload="init()">
+  <canvas id="canvas" width="500" height="500" />
+</body>
+</html>

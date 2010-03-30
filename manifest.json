@@ -1,0 +1,16 @@
+{
+  "name": "Polar Clock",
+  "description": "Displays an animated polar clock in the Google Chrome toolbar.",
+  "version": "0.1",
+
+  "icons": {
+    "128": "icon_128.png"
+  },
+
+  "browser_action": {
+    "default_title": "Polar Clock",
+		"popup": "popup.html"
+  },
+
+  "background_page": "background.html"
+}
