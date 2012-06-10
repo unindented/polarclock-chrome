@@ -1,4 +1,4 @@
-# Polar Clock for Google Chrome ![Still Maintained?](http://stillmaintained.com/unindented/polarclock-chrome.png)
+# Polar Clock for Google Chrome
 
 Displays an animated polar clock in the Google Chrome toolbar.
 
